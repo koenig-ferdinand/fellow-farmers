@@ -1,0 +1,6 @@
+// my_frontend/types/external.d.ts
+
+// Since @types/framer-motion or @types/lucide-react don't exist on npm,
+// we declare them here so TypeScript stops complaining.
+declare module 'framer-motion';
+declare module 'lucide-react';

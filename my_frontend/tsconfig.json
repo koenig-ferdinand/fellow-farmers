@@ -1,0 +1,46 @@
+// my_frontend/tsconfig.json
+{
+  "compilerOptions": {
+    // Support modern JS features
+    "target": "esnext",
+    // Let TS know we use DOM APIs
+    "lib": ["dom", "dom.iterable", "esnext"],
+
+    // Accept .js files if needed
+    "allowJs": true,
+    // Skip .d.ts checks in node_modules
+    "skipLibCheck": true,
+    // Strict type checking is recommended
+    "strict": true,
+    // Enforce consistent casing in imports
+    "forceConsistentCasingInFileNames": true,
+    // We don't emit .js (Next.js does it)
+    "noEmit": true,
+
+    // ECMAScript module syntax
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+
+    // Next.js typically uses either "preserve" or "react-jsx" for JSX
+    "jsx": "preserve",
+
+    // Speeds up build by caching
+    "incremental": true,
+
+    // Base path for absolute imports
+    "baseUrl": ".",
+    // Our path alias (optional)
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+
+  // Tells TS to include next-env.d.ts (Next.js), all src files, plus our new types folder
+  "include": ["next-env.d.ts", "src/**/*", "types/**/*"],
+
+  // Exclude node_modules
+  "exclude": ["node_modules"]
+}

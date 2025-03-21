@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Friendly Farm AI - Results</title>
+    <!-- Poppins Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --gradient-start: #00cfcd;
+        --gradient-end: #7fca3f;
+
+        --color-heading: #0f172a;
+        --color-subtext: #475569;
+        --color-text: #1e293b;
+        --color-white: #ffffff;
+        --color-accent: #00cfcd;
+        --color-accent-hover: #00b1b0;
+        --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.15);
+        --shadow-button: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --font-main: "Poppins", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: var(--font-main);
+        background: var(--color-white);
+        color: var(--color-text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      /* Header uses the same gradient as the first page */
+      header {
+        background: linear-gradient(
+          to right,
+          var(--gradient-start),
+          var(--gradient-end)
+        );
+        padding: 1.5rem 1rem;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      }
+      header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--color-white);
+      }
+      header p {
+        font-size: 1rem;
+        color: var(--color-subtext);
+        margin-top: 0.2rem;
+      }
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+      .section-block {
+        background: var(--color-white);
+        border-radius: 16px;
+        box-shadow: var(--shadow-card);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.5s ease forwards;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .section-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--color-heading);
+        margin-bottom: 1rem;
+      }
+      .user-info p {
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+      }
+      .error {
+        color: red;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      /* 4 Boxes (Analysis) */
+      .card-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      }
+      .analysis-card {
+        background: #f9fafb;
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        transition: transform 0.2s;
+      }
+      .analysis-card:hover {
+        transform: translateY(-4px);
+      }
+      .analysis-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.3rem;
+        color: var(--color-heading);
+        font-weight: 600;
+      }
+      .analysis-card p {
+        font-size: 0.95rem;
+        margin-bottom: 0;
+        color: var(--color-text);
+      }
+      .soil-health h3 {
+        color: #7fca3f;
+      }
+      .water-management h3 {
+        color: #00cfcd;
+      }
+      .disease-pests h3 {
+        color: #ff4a4a;
+      }
+      .recommended-products h3 {
+        color: #eb8200;
+      }
+      .action-plan-box {
+        background: #f9fafb;
+        border-radius: 12px;
+        padding: 1rem;
+      }
+      ul {
+        list-style: disc;
+        margin-left: 1.5rem;
+        margin-top: 0.5rem;
+      }
+      /* "Excited for More?" section - extra cards */
+      .extras-section {
+        text-align: center;
+      }
+      .extras-grid {
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(220px, 1fr));
+        gap: 2rem;
+        justify-items: center;
+      }
+      .extra-card {
+        background: #f9fafb;
+        border-radius: 12px;
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 280px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+      }
+      .extra-card:hover {
+        transform: translateY(-4px);
+      }
+      .extra-card h3 {
+        margin-bottom: 0.4rem;
+        font-size: 1.2rem;
+        color: var(--color-heading);
+        font-weight: 600;
+      }
+      .extra-card p {
+        font-size: 0.95rem;
+        color: var(--color-text);
+      }
+      .link-back {
+        display: inline-block;
+        margin-top: 1rem;
+        color: var(--color-accent);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .link-back:hover {
+        text-decoration: underline;
+      }
+      footer {
+        background-color: #0f172a;
+        color: #cbd5e1;
+        text-align: center;
+        padding: 1rem;
+        font-size: 0.85rem;
+        margin-top: auto;
+      }
+      footer span {
+        opacity: 0.8;
+      }
+      /* Modal overlay for extension content */
+      #extension-content {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+      #extension-content .content-box {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        max-width: 80%;
+        max-height: 80%;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+      #extension-content .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #ff4a4a;
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      /* Red Purchase button (dead) - now larger and centered below charts */
+      .purchase-btn {
+        display: block;
+        margin: 2rem auto;
+        padding: 0.75rem 1.5rem;
+        background-color: red;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: default;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+      /* Charts container styling */
+      #charts-container {
+        margin-top: 2rem;
+      }
+      #charts-container h3 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      #charts-container canvas {
+        display: block;
+        margin: 0 auto 2rem auto;
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Fellow Farmer</h1>
+      <p>Powered by Syngenta. Powered by Nature.</p>
+    </header>
+    <div class="container">
+      {% if error %}
+      <p class="error"><strong>Error:</strong> {{ error }}</p>
+      {% else %}
+      <!-- USER INFO -->
+      <div class="section-block user-info">
+        <p><strong>Town:</strong> {{ town }}</p>
+        <p><strong>Coordinates:</strong> {{ latitude }}, {{ longitude }}</p>
+        <p><strong>Crop:</strong> {{ crop }}</p>
+        <p><strong>Field Size (acres):</strong> {{ field_size }}</p>
+      </div>
+      <!-- OPTIMAL PLANTING PERIOD -->
+      <div class="section-block">
+        <h2 class="section-title">Optimal Planting Period</h2>
+        <p>
+          From
+          <strong>{{ schedule.optimal_planting_interval.start_date }}</strong>
+          to <strong>{{ schedule.optimal_planting_interval.end_date }}</strong>
+        </p>
+      </div>
+      <!-- WARNINGS -->
+      <div class="section-block">
+        <h2 class="section-title">Warnings</h2>
+        {% if schedule.warnings %}
+        <ul>
+          {% for w in schedule.warnings %}
+          <li>{{ w }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No warnings.</p>
+        {% endif %}
+      </div>
+      <!-- FIELD ANALYSIS & RECOMMENDATIONS -->
+      <div class="section-block">
+        <h2 class="section-title">Recommendations</h2>
+        <div class="card-grid">
+          <div class="analysis-card soil-health">
+            <h3>Soil Health</h3>
+            <p>{{ schedule.soil_rec.Suggestion }}</p>
+          </div>
+          <div class="analysis-card water-management">
+            <h3>Water Management</h3>
+            <p>{{ schedule.irrigation_rec.Suggestion }}</p>
+          </div>
+          <div class="analysis-card disease-pests">
+            <h3>Disease & Pests</h3>
+            <p>{{ schedule.disease_risk.Suggestion }}</p>
+          </div>
+          <div class="analysis-card recommended-products">
+            <h3>Recommended Products</h3>
+            {% for item in schedule.fertilizer_timeline %} {% if item.product in
+            ["StressBuster","YieldBooster"] %}
+            <p><strong>{{ item.product }}</strong>: {{ item.instructions }}</p>
+            {% endif %} {% endfor %}
+          </div>
+        </div>
+      </div>
+      <!-- SELECTED ANALYSIS DETAILS -->
+      <div class="section-block">
+        <h2 class="section-title">Deep Analysis</h2>
+        <h3>Product Details</h3>
+        <ul>
+          {% for item in schedule.fertilizer_timeline %} {% if item.data %}
+          <li><strong>{{ item.product }} Data:</strong> {{ item.data }}</li>
+          {% endif %} {% endfor %}
+        </ul>
+        <h3>Water Management Details</h3>
+        <p>{{ schedule.irrigation_rec.Effect }}</p>
+        <h3>Disease & Pests Details</h3>
+        <p>{{ schedule.disease_risk.Effect }}</p>
+        <h3>Soil Health Details</h3>
+        <p>{{ schedule.soil_rec.Effect }}</p>
+        <!-- Hardcoded Charts Section -->
+        <div id="charts-container">
+          <h3>Yield Improvement Chart</h3>
+          <canvas id="chartYield" width="400" height="200"></canvas>
+          <h3>Soil Health Index Chart</h3>
+          <canvas id="chartSoil" width="400" height="200"></canvas>
+        </div>
+        <!-- Red Purchase button (dead), larger and centered below charts -->
+        <button class="purchase-btn">Purchase</button>
+      </div>
+      <!-- ACTION PLAN -->
+      <div class="section-block">
+        <h2 class="section-title">Take Action</h2>
+        <div class="action-plan-box">
+          <p>
+            <strong>Recommended Planting Period:</strong>
+            {{ schedule.optimal_planting_interval.start_date }} to {{
+            schedule.optimal_planting_interval.end_date }}
+          </p>
+          <ul>
+            {% for event in schedule.fertilizer_timeline %}
+            <li>
+              <strong>Day {{ event.day }}</strong> ({{ event.action_date }}): {%
+              if event.event %} <br />Event: {{ event.event }} {% endif %} {% if
+              event.product %} <br />Product: {{ event.product }} {% endif %}
+              <br /><em>{{ event.instructions }}</em>
+            </li>
+            {% endfor %}
+          </ul>
+          <p>
+            <strong>Total Fertilizer Needed:</strong>
+            {{ schedule.total_fertilizer_needed }}
+          </p>
+        </div>
+      </div>
+      <!-- EXCITED FOR MORE? - Extra cards -->
+      <div class="section-block extras-section">
+        <h2 class="section-title">Excited for more?</h2>
+        <p>Choose an option to explore:</p>
+        <div class="extras-grid">
+          <a href="#" class="extra-card" data-target="/fellow">
+            <h3>Fellow Farmers</h3>
+            <p>Connect with local farmers to share experiences.</p>
+          </a>
+          <a href="#" class="extra-card" data-target="/expert">
+            <h3>Contact Experts</h3>
+            <p>Get insights from agronomy experts in your region.</p>
+          </a>
+          <!-- Third card that does nothing -->
+          <a href="#" class="extra-card">
+            <h3>Try new</h3>
+            <p>Discover new plant varieties and suggestions for your area.</p>
+          </a>
+        </div>
+      </div>
+      <a class="link-back" href="/">← Go back</a>
+      {% endif %}
+    </div>
+    <!-- Modal overlay for dynamic extension content -->
+    <div id="extension-content">
+      <div class="content-box">
+        <button class="close-btn" onclick="closeExtension()">Close</button>
+        <div id="extension-inner"></div>
+      </div>
+    </div>
+    <footer>
+      &copy;
+      <span>2025 Syngenta Biologicals – Innovation powered by nature</span>
+    </footer>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      // Chart: Yield Improvement Chart
+      const ctxYield = document.getElementById("chartYield").getContext("2d");
+      const chartYield = new Chart(ctxYield, {
+        type: "bar",
+        data: {
+          labels: ["Baseline", "After Fertilizer", "Optimal Yield"],
+          datasets: [
+            {
+              label: "Yield (tons/acre)",
+              data: [2.5, 3.2, 4.0],
+              backgroundColor: [
+                "rgba(0, 207, 205, 0.6)",
+                "rgba(0, 207, 205, 0.8)",
+                "rgba(127, 202, 63, 0.8)",
+              ],
+              borderColor: [
+                "rgba(0, 207, 205, 1)",
+                "rgba(0, 207, 205, 1)",
+                "rgba(127, 202, 63, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "Tons per Acre",
+              },
+            },
+          },
+          plugins: {
+            legend: { display: false },
+          },
+        },
+      });
+      // Chart: Soil Health Index Chart
+      const ctxSoil = document.getElementById("chartSoil").getContext("2d");
+      const chartSoil = new Chart(ctxSoil, {
+        type: "line",
+        data: {
+          labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
+          datasets: [
+            {
+              label: "Soil Health Index",
+              data: [65, 70, 75, 80, 85],
+              backgroundColor: "rgba(127, 202, 63, 0.3)",
+              borderColor: "rgba(127, 202, 63, 1)",
+              borderWidth: 2,
+              fill: true,
+              tension: 0.3,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: false,
+              title: {
+                display: true,
+                text: "Health Index",
+              },
+            },
+          },
+          plugins: {
+            legend: { display: false },
+          },
+        },
+      });
+    </script>
+    <script>
+      // Function to close the modal overlay
+      function closeExtension() {
+        document.getElementById("extension-content").style.display = "none";
+      }
+      // Add click event listeners only to extra cards that have a data-target attribute
+      document.querySelectorAll(".extra-card").forEach(function (card) {
+        card.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetEndpoint = card.getAttribute("data-target");
+          if (targetEndpoint) {
+            fetch(targetEndpoint)
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Network response was not ok");
+                }
+                return response.text();
+              })
+              .then((htmlContent) => {
+                document.getElementById("extension-inner").innerHTML =
+                  htmlContent;
+                document.getElementById("extension-content").style.display =
+                  "flex";
+              })
+              .catch((error) => {
+                console.error("Error loading content:", error);
+                alert("Error loading content. Please try again.");
+              });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

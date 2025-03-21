@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Friendly Farm AI - Input</title>
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Same brand & style colors */
+        --gradient-start: #00cfcd;
+        --gradient-end: #7fca3f;
+
+        --color-heading: #0f172a;
+        --color-subtext: #475569;
+        --color-text: #1e293b;
+        --color-white: #ffffff;
+        --color-accent: #00cfcd;
+        --color-accent-hover: #00b1b0;
+
+        --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.15);
+        --shadow-button: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+        --font-main: "Poppins", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: var(--font-main);
+        background: #fff; /* White base for the lower half */
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Small language button (unchanged) */
+      .switch-lang-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--color-white);
+        color: var(--color-heading);
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 500;
+        box-shadow: var(--shadow-button);
+        cursor: pointer;
+        transition: background 0.3s ease;
+        z-index: 999;
+      }
+      .switch-lang-btn:hover {
+        background: var(--color-accent);
+        color: #fff;
+      }
+
+      /* 1) HERO (top half) with gradient & wave at the bottom */
+      .hero {
+        width: 100%;
+        height: 50vh; /* covers upper half of the screen */
+        background: linear-gradient(
+          to right,
+          var(--gradient-start),
+          var(--gradient-end)
+        );
+        position: relative;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: var(--color-heading);
+        padding: 2rem 1rem;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+      }
+      .hero p {
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+        color: var(--color-subtext);
+      }
+
+      /* WAVE at the bottom of the hero */
+      .wave-divider {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        line-height: 0;
+      }
+      .wave-divider svg {
+        display: block;
+        width: 100%;
+      }
+
+      /* 2) FORM is completely independent (below the hero), on white background */
+      .content {
+        flex: 1;
+        width: 100%;
+        max-width: 800px;
+        margin: 3rem auto;
+        padding: 0 1.5rem;
+      }
+
+      .form-card {
+        background: var(--color-white);
+        border-radius: 16px;
+        box-shadow: var(--shadow-card);
+        padding: 2rem;
+        animation: floatUp 0.5s ease forwards;
+      }
+      @keyframes floatUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .form-card h2 {
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--color-heading);
+        margin-bottom: 1.5rem;
+      }
+      .form-card label {
+        display: block;
+        margin-bottom: 0.4rem;
+        font-weight: 500;
+        color: var(--color-heading);
+      }
+      .form-card input,
+      .form-card select {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1.2rem;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        font-size: 1rem;
+      }
+      .form-card button {
+        width: 100%;
+        padding: 0.9rem;
+        background: var(--color-accent);
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        box-shadow: var(--shadow-button);
+        transition: background 0.3s ease;
+      }
+      .form-card button:hover {
+        background: var(--color-accent-hover);
+      }
+
+      /* 3) FOOTER */
+      footer {
+        background-color: #0f172a;
+        color: #cbd5e1;
+        text-align: center;
+        padding: 1rem;
+        font-size: 0.85rem;
+      }
+      footer span {
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Optional language button -->
+    <button class="switch-lang-btn">Switch to DE</button>
+
+    <!-- HERO: covers upper half with gradient -->
+    <section class="hero">
+      <h1>Fellow Farmer</h1>
+      <p>Powered by Syngenta. Powered by Nature.</p>
+      <!-- Wave at bottom -->
+      <div class="wave-divider">
+        <svg
+          viewBox="0 0 1440 100"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="#fff"
+            d="M0,50 C480,150 960,0 1440,50 L1440,00 L0,0 Z"
+          ></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- CONTENT: white background, form is fully independent here -->
+    <main class="content">
+      <div class="form-card">
+        <h2>Farm Details</h2>
+        <form action="/recommend" method="POST">
+          <label for="town">Location</label>
+          <input
+            type="text"
+            id="town"
+            name="town"
+            placeholder="Enter your location"
+            required
+          />
+
+          <label for="crop">Crop Type</label>
+          <select id="crop" name="crop" required>
+            <option value="Wheat">Wheat</option>
+            <option value="Rice">Rice</option>
+            <option value="Cotton">Cotton</option>
+          </select>
+
+          <label for="field_size">Field Size (acres)</label>
+          <input
+            type="number"
+            id="field_size"
+            name="field_size"
+            step="0.1"
+            value="5.0"
+            required
+          />
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      &copy;
+      <span>2025 Syngenta Biologicals – Innovation powered by nature</span>
+    </footer>
+  </body>
+</html>
